@@ -3,686 +3,678 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brainrot Amore 💚❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Brainrot Amore 🇮🇹</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green: #00e676;
-    --red: #ff1744;
-    --gold: #ffd600;
-    --bg: #0a0a0f;
-    --card-bg: #13131a;
-    --text: #f0f0f0;
-    --muted: #555;
+    --blue: #3b82f6;
+    --blue-bright: #60a5fa;
+    --blue-glow: rgba(59,130,246,0.35);
+    --green: #22c55e;
+    --green-glow: rgba(34,197,94,0.35);
+    --red: #ef4444;
+    --red-glow: rgba(239,68,68,0.35);
+    --bg: #050810;
+    --card: #0f172a;
+    --card-border: rgba(59,130,246,0.2);
+    --text: #f1f5f9;
+    --muted: #475569;
+    --subtle: #1e293b;
   }
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
+html, body {
+height: 100%;
+width: 100%;
+overflow: hidden;
 background: var(–bg);
 color: var(–text);
-font-family: ‘DM Sans’, sans-serif;
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-overflow: hidden;
-position: relative;
+font-family: ‘Outfit’, sans-serif;
+touch-action: none;
 }
 
 body::before {
 content: ‘’;
 position: fixed;
 inset: 0;
-background:
-radial-gradient(ellipse at 20% 50%, rgba(0,230,118,0.06) 0%, transparent 60%),
-radial-gradient(ellipse at 80% 50%, rgba(255,23,68,0.06) 0%, transparent 60%);
+background-image:
+linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+background-size: 40px 40px;
 pointer-events: none;
 z-index: 0;
 }
 
-header {
-z-index: 10;
-padding: 20px 0 10px;
-text-align: center;
+body::after {
+content: ‘’;
+position: fixed;
+inset: 0;
+background:
+radial-gradient(ellipse 70% 40% at 50% 0%, rgba(59,130,246,0.13) 0%, transparent 70%),
+radial-gradient(ellipse 50% 30% at 50% 100%, rgba(99,102,241,0.07) 0%, transparent 70%);
+pointer-events: none;
+z-index: 0;
 }
 
-header h1 {
+/* –– LAYOUT –– */
+.app {
+position: relative;
+z-index: 1;
+width: 100%;
+height: 100%;
+max-width: 420px;
+margin: 0 auto;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0 16px;
+}
+
+/* –– HEADER –– */
+header {
+flex-shrink: 0;
+width: 100%;
+text-align: center;
+padding: 14px 0 6px;
+}
+
+.logo {
 font-family: ‘Bebas Neue’, cursive;
-font-size: 2.8rem;
-letter-spacing: 4px;
-background: linear-gradient(135deg, #00e676, #ffd600, #ff1744);
+font-size: clamp(1.8rem, 8vw, 2.4rem);
+letter-spacing: 5px;
+background: linear-gradient(135deg, var(–blue-bright) 0%, #a78bfa 60%, var(–blue) 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 line-height: 1;
 }
 
-header p {
-font-size: 0.78rem;
+.sub {
+font-size: 0.62rem;
 color: var(–muted);
-letter-spacing: 2px;
+letter-spacing: 3px;
 text-transform: uppercase;
-margin-top: 4px;
+margin-top: 2px;
 }
 
-.score-bar {
+/* –– SCORE –– */
+.score-row {
+flex-shrink: 0;
 display: flex;
-gap: 24px;
-z-index: 10;
-margin: 6px 0 10px;
-font-family: ‘Bebas Neue’, cursive;
-font-size: 1.1rem;
-letter-spacing: 2px;
+gap: 10px;
+margin: 8px 0 6px;
 }
 
-.score-bar .smash { color: var(–green); }
-.score-bar .pass  { color: var(–red); }
+.score-pill {
+display: flex;
+align-items: center;
+gap: 6px;
+padding: 5px 14px;
+border-radius: 50px;
+font-family: ‘Bebas Neue’, cursive;
+font-size: 0.95rem;
+letter-spacing: 1.5px;
+}
 
-/* CARD STACK */
+.score-pill.s { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(–green); }
+.score-pill.p { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.3);  color: var(–red); }
+
+/* –– STACK AREA –– */
+.stack-wrap {
+flex: 1;
+width: 100%;
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 0;
+}
+
 .stack {
 position: relative;
-width: 340px;
-height: 460px;
-z-index: 10;
-margin-top: 4px;
+width: 100%;
+max-width: 360px;
+/* responsive height: fills whatever space remains */
+height: min(460px, calc(100vh - 270px));
 }
 
+/* –– CARDS –– */
 .card {
 position: absolute;
 inset: 0;
-border-radius: 20px;
+border-radius: 22px;
 overflow: hidden;
-background: var(–card-bg);
-box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+background: var(–card);
+border: 1px solid var(–card-border);
+box-shadow: 0 8px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(59,130,246,0.07);
+display: flex;
+flex-direction: column;
 cursor: grab;
 user-select: none;
-transition: transform 0.15s ease;
+-webkit-user-select: none;
 will-change: transform;
-border: 1px solid rgba(255,255,255,0.06);
 }
 
 .card:active { cursor: grabbing; }
 
-.card img {
-width: 100%;
-height: 330px;
-object-fit: cover;
-object-position: center top;
-display: block;
+/* depth layers — NOT on the active card */
+.card.depth-1 {
+z-index: 2;
+transform: scale(0.94) translateY(14px);
+filter: brightness(0.5) saturate(0.4);
 pointer-events: none;
 }
 
+.card.depth-2 {
+z-index: 1;
+transform: scale(0.88) translateY(28px);
+filter: brightness(0.28) saturate(0.2);
+pointer-events: none;
+}
+
+.card.depth-0 { z-index: 3; }
+
+.card img {
+width: 100%;
+flex: 1;
+min-height: 0;
+object-fit: cover;
+object-position: center center;
+display: block;
+pointer-events: none;
+background: var(–subtle);
+transition: opacity 0.3s;
+}
+
+.card img.loading { opacity: 0.5; }
+
 .card-info {
-padding: 14px 18px 12px;
+flex-shrink: 0;
+padding: 11px 16px 13px;
+background: linear-gradient(180deg, rgba(15,23,42,0) 0%, rgba(15,23,42,0.98) 20%);
 }
 
 .card-info h2 {
 font-family: ‘Bebas Neue’, cursive;
-font-size: 1.6rem;
+font-size: clamp(1.25rem, 5.5vw, 1.6rem);
 letter-spacing: 2px;
-line-height: 1;
 color: var(–text);
+line-height: 1.1;
 }
 
-.card-info .tagline {
-font-size: 0.8rem;
-color: #aaa;
-margin-top: 4px;
+.card-tagline {
+font-size: 0.72rem;
+color: #64748b;
+margin-top: 3px;
 font-style: italic;
 }
 
-.card-info .emoji-row {
-margin-top: 8px;
-font-size: 1.3rem;
+.card-emojis {
 display: flex;
-gap: 6px;
+gap: 4px;
+margin-top: 7px;
+font-size: 1.05rem;
 }
 
-/* vote overlays */
+/* –– STAMPS –– */
 .stamp {
 position: absolute;
-top: 30px;
 font-family: ‘Bebas Neue’, cursive;
-font-size: 3rem;
-letter-spacing: 4px;
-border: 4px solid;
-padding: 4px 14px;
+font-size: clamp(1.8rem, 7vw, 2.6rem);
+letter-spacing: 3px;
+border: 3px solid;
+padding: 3px 12px;
 border-radius: 8px;
 opacity: 0;
 pointer-events: none;
-transition: opacity 0.1s;
-transform: rotate(-15deg);
+z-index: 10;
+transition: opacity 0.07s;
+top: 22px;
 }
 
-.stamp.smash-stamp {
-left: 20px;
+.stamp-smash {
+left: 14px;
 color: var(–green);
 border-color: var(–green);
-transform: rotate(-15deg);
+transform: rotate(-12deg);
+box-shadow: 0 0 16px var(–green-glow);
+text-shadow: 0 2px 10px rgba(34,197,94,0.5);
 }
 
-.stamp.pass-stamp {
-right: 20px;
+.stamp-pass {
+right: 14px;
 color: var(–red);
 border-color: var(–red);
-transform: rotate(15deg);
+transform: rotate(12deg);
+box-shadow: 0 0 16px var(–red-glow);
+text-shadow: 0 2px 10px rgba(239,68,68,0.5);
 }
 
-/* bg stack cards */
-.card-bg-2 {
-transform: scale(0.95) translateY(12px);
-z-index: -1;
-filter: brightness(0.6);
-}
-
-.card-bg-3 {
-transform: scale(0.90) translateY(24px);
-z-index: -2;
-filter: brightness(0.35);
-}
-
-/* BUTTONS */
-.buttons {
+/* –– DOTS –– */
+.dots {
+flex-shrink: 0;
 display: flex;
-gap: 32px;
-margin-top: 22px;
-z-index: 10;
+gap: 5px;
+flex-wrap: wrap;
+justify-content: center;
+max-width: 260px;
+margin: 4px 0 2px;
+}
+
+.dot {
+width: 7px; height: 7px;
+border-radius: 50%;
+background: var(–subtle);
+border: 1px solid #334155;
+transition: all 0.28s ease;
+}
+
+.dot.active  { width: 16px; border-radius: 4px; background: var(–blue); border-color: var(–blue); box-shadow: 0 0 8px var(–blue-glow); }
+.dot.smashed { background: var(–green); border-color: var(–green); }
+.dot.passed  { background: var(–red);   border-color: var(–red); }
+
+/* –– HINT –– */
+.hint {
+flex-shrink: 0;
+font-size: 0.6rem;
+color: #334155;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 6px;
+}
+
+/* –– BUTTONS –– */
+.btn-row {
+flex-shrink: 0;
+display: flex;
+align-items: center;
+gap: 28px;
+padding: 10px 0 18px;
 }
 
 .btn {
-width: 68px;
-height: 68px;
+width: 66px; height: 66px;
 border-radius: 50%;
 border: none;
-font-size: 1.8rem;
+font-size: 1.7rem;
 cursor: pointer;
 display: flex;
 align-items: center;
 justify-content: center;
-transition: transform 0.15s, box-shadow 0.15s;
-position: relative;
-overflow: hidden;
+transition: transform 0.12s, box-shadow 0.15s;
+-webkit-tap-highlight-color: transparent;
 }
 
-.btn::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-border-radius: 50%;
-background: rgba(255,255,255,0.12);
-transform: scale(0);
-transition: transform 0.25s;
-}
-
-.btn:hover::before { transform: scale(1); }
-.btn:active { transform: scale(0.88); }
+.btn:active { transform: scale(0.82) !important; }
 
 .btn-pass {
-background: rgba(255,23,68,0.15);
-border: 2px solid var(–red);
+background: rgba(239,68,68,0.1);
+border: 2px solid rgba(239,68,68,0.45);
 color: var(–red);
-box-shadow: 0 0 20px rgba(255,23,68,0.2);
-}
-
-.btn-pass:hover {
-box-shadow: 0 0 30px rgba(255,23,68,0.45);
+box-shadow: 0 0 18px rgba(239,68,68,0.12);
 }
 
 .btn-smash {
-background: rgba(0,230,118,0.15);
-border: 2px solid var(–green);
+background: rgba(34,197,94,0.1);
+border: 2px solid rgba(34,197,94,0.45);
 color: var(–green);
-box-shadow: 0 0 20px rgba(0,230,118,0.2);
+box-shadow: 0 0 18px rgba(34,197,94,0.12);
 }
 
-.btn-smash:hover {
-box-shadow: 0 0 30px rgba(0,230,118,0.45);
-}
+.btn-pass:hover  { box-shadow: 0 0 28px var(–red-glow);   transform: scale(1.07); }
+.btn-smash:hover { box-shadow: 0 0 28px var(–green-glow); transform: scale(1.07); }
 
-/* swipe animations */
-.fly-left {
-animation: flyLeft 0.45s cubic-bezier(0.55, 0, 1, 0.45) forwards;
-}
-
-.fly-right {
-animation: flyRight 0.45s cubic-bezier(0.55, 0, 1, 0.45) forwards;
-}
-
+/* –– ANIMATIONS –– */
 @keyframes flyLeft {
-0%   { transform: translateX(0) rotate(0deg); opacity: 1; }
-100% { transform: translateX(-140%) rotate(-28deg); opacity: 0; }
+to { transform: translateX(-130vw) rotate(-28deg) scale(0.75); opacity: 0; }
 }
-
 @keyframes flyRight {
-0%   { transform: translateX(0) rotate(0deg); opacity: 1; }
-100% { transform: translateX(140%) rotate(28deg); opacity: 0; }
+to { transform: translateX(130vw) rotate(28deg) scale(0.75); opacity: 0; }
+}
+@keyframes promoteCard {
+from { transform: scale(0.94) translateY(14px); filter: brightness(0.5) saturate(0.4); }
+to   { transform: scale(1) translateY(0); filter: brightness(1) saturate(1); }
+}
+@keyframes promoteCard2 {
+from { transform: scale(0.88) translateY(28px); filter: brightness(0.28) saturate(0.2); }
+to   { transform: scale(0.94) translateY(14px); filter: brightness(0.5) saturate(0.4); }
 }
 
-/* result screen */
+.fly-left  { animation: flyLeft  0.40s cubic-bezier(0.55,0,1,0.45) forwards; }
+.fly-right { animation: flyRight 0.40s cubic-bezier(0.55,0,1,0.45) forwards; }
+.promote-0 { animation: promoteCard  0.36s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.promote-1 { animation: promoteCard2 0.36s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+
+/* –– DONE SCREEN –– */
 .done-screen {
 display: none;
 flex-direction: column;
 align-items: center;
 text-align: center;
 z-index: 10;
-margin-top: 40px;
-padding: 0 20px;
+width: 100%;
+flex: 1;
+overflow-y: auto;
+padding: 24px 0 20px;
 }
 
-.done-screen h2 {
+.done-title {
 font-family: ‘Bebas Neue’, cursive;
-font-size: 3rem;
+font-size: clamp(2rem, 9vw, 3rem);
 letter-spacing: 4px;
-background: linear-gradient(135deg, #00e676, #ffd600);
+background: linear-gradient(135deg, var(–blue-bright), #a78bfa);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 }
 
-.done-screen p { color: #aaa; margin-top: 8px; font-size: 0.9rem; }
+.done-sub { color: var(–muted); font-size: 0.8rem; margin-top: 6px; line-height: 1.4; }
 
 .result-grid {
 display: flex;
 flex-wrap: wrap;
-gap: 10px;
+gap: 7px;
 justify-content: center;
-margin-top: 20px;
+margin-top: 18px;
 max-width: 360px;
+padding: 0 12px;
 }
 
-.result-chip {
-padding: 6px 14px;
+.chip {
+padding: 5px 13px;
 border-radius: 50px;
-font-size: 0.8rem;
+font-size: 0.73rem;
 font-weight: 600;
 }
 
-.chip-smash { background: rgba(0,230,118,0.15); border: 1px solid var(–green); color: var(–green); }
-.chip-pass  { background: rgba(255,23,68,0.15);  border: 1px solid var(–red);   color: var(–red); }
+.chip-smash { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.35); color: var(–green); }
+.chip-pass  { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.35);  color: var(–red); }
 
 .btn-restart {
-margin-top: 22px;
-padding: 12px 32px;
+margin-top: 24px;
+padding: 13px 36px;
 border-radius: 50px;
-background: linear-gradient(135deg, #00e676, #ffd600);
+background: linear-gradient(135deg, var(–blue), #6366f1);
 border: none;
-color: #000;
+color: #fff;
 font-family: ‘Bebas Neue’, cursive;
-font-size: 1.2rem;
+font-size: 1.1rem;
 letter-spacing: 2px;
 cursor: pointer;
 transition: transform 0.15s, box-shadow 0.15s;
+box-shadow: 0 0 28px var(–blue-glow);
+-webkit-tap-highlight-color: transparent;
 }
 
-.btn-restart:hover {
-transform: scale(1.05);
-box-shadow: 0 6px 30px rgba(0,230,118,0.4);
-}
-
-/* progress dots */
-.dots {
-display: flex;
-gap: 5px;
-z-index: 10;
-margin-top: 14px;
-}
-
-.dot {
-width: 7px; height: 7px;
-border-radius: 50%;
-background: var(–muted);
-transition: background 0.3s;
-}
-
-.dot.done-smash { background: var(–green); }
-.dot.done-pass  { background: var(–red); }
-.dot.current    { background: var(–gold); width: 18px; border-radius: 4px; }
+.btn-restart:hover { transform: scale(1.05); box-shadow: 0 0 50px var(–blue-glow); }
 </style>
 
 </head>
 <body>
 
-<header>
-  <h1>🇮🇹 Brainrot Amore 🇮🇹</h1>
-  <p>Smash or Pass — Italian Brainrot Edition</p>
-</header>
+<div class="app">
 
-<div class="score-bar">
-  <span class="smash">✅ SMASH: <span id="smash-count">0</span></span>
-  <span class="pass">❌ PASS: <span id="pass-count">0</span></span>
-</div>
+  <header>
+    <div class="logo">🇮🇹 Brainrot Amore 🇮🇹</div>
+    <div class="sub">Smash or Pass — Italian Brainrot Edition</div>
+  </header>
 
-<div class="stack" id="stack">
-  <!-- Cards injected by JS -->
-</div>
+  <div class="score-row">
+    <div class="score-pill s">💚 SMASH <span id="smash-n">0</span></div>
+    <div class="score-pill p">💀 PASS <span id="pass-n">0</span></div>
+  </div>
 
-<div class="dots" id="dots"></div>
+  <div class="stack-wrap" id="stack-wrap">
+    <div class="stack" id="stack"></div>
+  </div>
 
-<div class="buttons" id="buttons">
-  <button class="btn btn-pass"  onclick="vote('pass')">💀</button>
-  <button class="btn btn-smash" onclick="vote('smash')">💚</button>
-</div>
+  <div class="dots" id="dots"></div>
+  <div class="hint">← swipe left to pass &nbsp;|&nbsp; swipe right to smash →</div>
 
-<div class="done-screen" id="done-screen">
-  <h2>Finito! 🎉</h2>
-  <p>You've judged all the creatures of the Italian Brainrot universe.</p>
-  <div class="result-grid" id="result-grid"></div>
-  <button class="btn-restart" onclick="restart()">🔄 GIOCA DI NUOVO</button>
+  <div class="btn-row" id="btn-row">
+    <button class="btn btn-pass"  onclick="vote('pass')"  aria-label="Pass">💀</button>
+    <button class="btn btn-smash" onclick="vote('smash')" aria-label="Smash">💚</button>
+  </div>
+
+  <div class="done-screen" id="done">
+    <div class="done-title">Finito! 🎉</div>
+    <div class="done-sub">You've judged every creature<br>of the Brainrot universe.</div>
+    <div class="result-grid" id="result-grid"></div>
+    <button class="btn-restart" onclick="restart()">🔄 Gioca di Nuovo</button>
+  </div>
+
 </div>
 
 <script>
-const creatures = [
-  {
-    name: "Bombardiro Crocodilo",
-    tagline: "Coccodrillo dell'aria, maestro della distruzione",
-    emojis: ["✈️","🐊","💣"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bombardiro_Crocodilo.jpg/400px-Bombardiro_Crocodilo.jpg",
-    fallback: "https://i.imgur.com/placeholder.jpg"
-  },
-  {
-    name: "Tralalero Tralala",
-    tagline: "Il re delle scarpe di squalo",
-    emojis: ["🦈","👟","🎵"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Tralalero_Tralala.jpg/400px-Tralalero_Tralala.jpg",
-    fallback: null
-  },
-  {
-    name: "Cappuccino Assassino",
-    tagline: "Caffè letale, morte dolcissima",
-    emojis: ["☕","🗡️","😈"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Cappuccino_Assassino.jpg/400px-Cappuccino_Assassino.jpg",
-    fallback: null
-  },
-  {
-    name: "Tung Tung Tung Sahur",
-    tagline: "Il bambino che non si ferma mai",
-    emojis: ["🥁","🌙","😤"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Tung_Tung_Tung_Sahur.jpg/400px-Tung_Tung_Tung_Sahur.jpg",
-    fallback: null
-  },
-  {
-    name: "Burbaloni Luigiloni",
-    tagline: "Uomo pallone di lusso assoluto",
-    emojis: ["🎈","🤌","💨"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Burbaloni_Luigiloni.jpg/400px-Burbaloni_Luigiloni.jpg",
-    fallback: null
-  },
-  {
-    name: "Frigo Camelo",
-    tagline: "Il freddo del deserto — o il contrario?",
-    emojis: ["🐪","❄️","🧊"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Frigo_Camelo.jpg/400px-Frigo_Camelo.jpg",
-    fallback: null
-  },
-  {
-    name: "Glorbo Fruttodrillo",
-    tagline: "Rettile tropicale, cuore di frutta",
-    emojis: ["🍉","🐊","🌺"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Glorbo_Fruttodrillo.jpg/400px-Glorbo_Fruttodrillo.jpg",
-    fallback: null
-  },
-  {
-    name: "Lirilì Laralà",
-    tagline: "La dea della collina cantante",
-    emojis: ["🎶","🌄","✨"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Liril%C3%AC_Laral%C3%A0.jpg/400px-Liril%C3%AC_Laral%C3%A0.jpg",
-    fallback: null
-  },
-  {
-    name: "Trippi Troppi",
-    tagline: "Due teste, un solo sogno allucinante",
-    emojis: ["🤯","🐸","🌀"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trippi_Troppi.jpg/400px-Trippi_Troppi.jpg",
-    fallback: null
-  },
-  {
-    name: "Bombombini Gusini",
-    tagline: "Oca bomba della pace perpetua",
-    emojis: ["🦢","💥","🕊️"],
-    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Bombombini_Gusini.jpg/400px-Bombombini_Gusini.jpg",
-    fallback: null
-  }
-];
+const BASE = 'https://static.animalbrainrot.com/images/';
 
-// Use placeholder images since wikimedia paths won't work — generate themed SVG placeholders
-function getPlaceholderSVG(name, emojis) {
-  const colors = [
-    ['#1a1a2e','#e94560'],
-    ['#0f3460','#16213e'],
-    ['#1b262c','#0f3460'],
-    ['#2d132c','#ee4540'],
-    ['#1c1c1c','#f5a623'],
-    ['#0a3d62','#60a3bc'],
-    ['#1e272e','#d2dae2'],
-    ['#2c3e50','#e74c3c'],
-    ['#16213e','#0f3460'],
-    ['#2d3436','#00b894']
-  ];
-  const idx = creatures.findIndex(c => c.name === name) % colors.length;
-  const [bg, accent] = colors[idx];
-  const emoji = emojis[0] || '🇮🇹';
-  const svgContent = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="340" height="330" viewBox="0 0 340 330">
-      <defs>
-        <radialGradient id="g${idx}" cx="50%" cy="40%" r="60%">
-          <stop offset="0%" stop-color="${accent}" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="${bg}"/>
-        </radialGradient>
-      </defs>
-      <rect width="340" height="330" fill="url(#g${idx})"/>
-      <rect x="0" y="0" width="340" height="330" fill="${bg}" opacity="0.4"/>
-      <!-- noise pattern suggestion -->
-      <text x="170" y="170" font-size="100" text-anchor="middle" dominant-baseline="middle">${emoji}</text>
-      <text x="170" y="260" font-size="14" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="sans-serif">[ AI IMAGE ]</text>
-    </svg>
-  `;
-  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgContent);
-}
+const creatures = [
+  { name:'Tralalero Tralala',      tagline:'Shark in Nikes — chaos at every step',              emojis:['🦈','👟','🎵'], img:BASE+'Tralalero%20Tralala.webp' },
+  { name:'Bombardiro Crocodillo',  tagline:'Flying alligator of absolute destruction',           emojis:['✈️','🐊','💣'], img:BASE+'Bombardino%20Crocodillo.webp' },
+  { name:'Tung Tung Tung Sahur',   tagline:'Terrifying anomaly that only appears at dawn',       emojis:['🥁','🌙','😤'], img:BASE+'Tung%20Tung%20Tung%20Sahur.webp' },
+  { name:'Brr Brr Patapim',        tagline:'Forest being with tangled roots & an arcane accent', emojis:['🌿','🦧','🗣️'], img:BASE+'Brr%20Brr%20Patapim.webp' },
+  { name:'Lirili Larila',          tagline:'Cactus elephant wandering deserts in sandals',        emojis:['🌵','🐘','🩴'], img:BASE+'Lirili%20Larila.webp' },
+  { name:'Bombombini Gusini',      tagline:'Goose bomber — adopted brother of Bombardiro',       emojis:['🦢','💥','🕊️'], img:BASE+'Bombombini%20Gusini.webp' },
+  { name:'Ballerina Capuchina',    tagline:'Graceful wife of Cappuccino Assassino',               emojis:['🩰','☕','💃'], img:BASE+'Ballerina%20Capuchina.webp' },
+  { name:'Glorbo Fruttodrillo',    tagline:'Watermelon-croc ruler of the swamps',                emojis:['🍉','🐊','🌺'], img:BASE+'Glorbo%20Fruttodrillo.webp' },
+  { name:'Boneca Ambalabu',        tagline:'Frog-tyre hybrid of the Brazilian forests',          emojis:['🐸','🔄','🌳'], img:BASE+'Boneca%20Ambalabu.webp' },
+  { name:'Chimpanzini Bananini',   tagline:'Wa wa wa — banana monkey chaos energy',              emojis:['🐒','🍌','🎵'], img:BASE+'Chimpanzini%20Bananini.webp' },
+];
 
 let deck = [];
 let results = [];
-let smash = 0, pass = 0;
-let isDragging = false;
-let startX = 0, currentX = 0;
-let topCard = null;
+let smashCount = 0, passCount = 0;
+let dragging = false;
+let startX = 0;
+let curX = 0;
+let topEl = null;
 
-function buildDeck() {
+function init() {
   deck = [...creatures];
   results = [];
-  smash = 0; pass = 0;
-  document.getElementById('smash-count').textContent = 0;
-  document.getElementById('pass-count').textContent = 0;
-  renderDots();
-  renderStack();
+  smashCount = passCount = 0;
+  document.getElementById('smash-n').textContent = 0;
+  document.getElementById('pass-n').textContent = 0;
+  buildDots();
+  buildStack();
 }
 
-function renderDots() {
-  const dots = document.getElementById('dots');
-  dots.innerHTML = '';
+function buildDots() {
+  const wrap = document.getElementById('dots');
+  wrap.innerHTML = '';
   deck.forEach((_, i) => {
     const d = document.createElement('div');
-    d.className = 'dot' + (i === 0 ? ' current' : '');
-    d.id = `dot-${i}`;
-    dots.appendChild(d);
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.id = 'dot' + i;
+    wrap.appendChild(d);
   });
 }
 
-function renderStack() {
+function buildStack() {
   const stack = document.getElementById('stack');
   stack.innerHTML = '';
+  topEl = null;
 
-  const visible = deck.slice(0, 3);
-  visible.forEach((creature, i) => {
-    const card = document.createElement('div');
-    card.className = 'card' + (i === 1 ? ' card-bg-2' : i === 2 ? ' card-bg-3' : '');
-    card.style.zIndex = 3 - i;
-
-    const img = document.createElement('img');
-    img.src = getPlaceholderSVG(creature.name, creature.emojis);
-    img.alt = creature.name;
-
-    const info = document.createElement('div');
-    info.className = 'card-info';
-    info.innerHTML = `
-      <h2>${creature.name}</h2>
-      <div class="tagline">${creature.tagline}</div>
-      <div class="emoji-row">${creature.emojis.map(e => `<span>${e}</span>`).join('')}</div>
-    `;
-
-    const smashStamp = document.createElement('div');
-    smashStamp.className = 'stamp smash-stamp';
-    smashStamp.textContent = 'SMASH';
-    smashStamp.id = 'stamp-smash';
-
-    const passStamp = document.createElement('div');
-    passStamp.className = 'stamp pass-stamp';
-    passStamp.textContent = 'PASS';
-    passStamp.id = 'stamp-pass';
-
-    card.appendChild(img);
-    card.appendChild(info);
-    card.appendChild(smashStamp);
-    card.appendChild(passStamp);
-
-    if (i === 0) {
-      topCard = card;
-      setupDrag(card);
-    }
-
+  // Render cards back-to-front so top card is last in DOM (highest stacking context)
+  const count = Math.min(3, deck.length);
+  for (let depth = count - 1; depth >= 0; depth--) {
+    const card = makeCard(deck[depth], depth);
     stack.appendChild(card);
-  });
-}
-
-function setupDrag(card) {
-  card.addEventListener('mousedown', dragStart);
-  card.addEventListener('touchstart', dragStart, { passive: true });
-  document.addEventListener('mousemove', dragMove);
-  document.addEventListener('touchmove', dragMove, { passive: true });
-  document.addEventListener('mouseup', dragEnd);
-  document.addEventListener('touchend', dragEnd);
-}
-
-function dragStart(e) {
-  isDragging = true;
-  startX = e.touches ? e.touches[0].clientX : e.clientX;
-  currentX = 0;
-  topCard.style.transition = 'none';
-}
-
-function dragMove(e) {
-  if (!isDragging) return;
-  const x = (e.touches ? e.touches[0].clientX : e.clientX) - startX;
-  currentX = x;
-  const rot = x * 0.08;
-  topCard.style.transform = `translateX(${x}px) rotate(${rot}deg)`;
-
-  const smashStamp = topCard.querySelector('#stamp-smash');
-  const passStamp  = topCard.querySelector('#stamp-pass');
-
-  const ratio = Math.min(Math.abs(x) / 80, 1);
-  if (x > 20) {
-    smashStamp.style.opacity = ratio;
-    passStamp.style.opacity = 0;
-  } else if (x < -20) {
-    passStamp.style.opacity = ratio;
-    smashStamp.style.opacity = 0;
-  } else {
-    smashStamp.style.opacity = 0;
-    passStamp.style.opacity = 0;
+    if (depth === 0) topEl = card;
   }
+
+  if (topEl) bindDrag(topEl);
 }
 
-function dragEnd() {
-  if (!isDragging) return;
-  isDragging = false;
-  document.removeEventListener('mousemove', dragMove);
-  document.removeEventListener('touchmove', dragMove);
-  document.removeEventListener('mouseup', dragEnd);
-  document.removeEventListener('touchend', dragEnd);
+function makeCard(creature, depth) {
+  const card = document.createElement('div');
+  card.className = 'card' + (depth > 0 ? ' depth-' + depth : ' depth-0');
+  card.dataset.depth = depth;
 
-  if (currentX > 80) {
-    vote('smash');
-  } else if (currentX < -80) {
-    vote('pass');
-  } else {
-    // snap back
-    topCard.style.transition = 'transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-    topCard.style.transform = '';
-    topCard.querySelector('#stamp-smash').style.opacity = 0;
-    topCard.querySelector('#stamp-pass').style.opacity = 0;
+  const img = document.createElement('img');
+  img.src = creature.img;
+  img.alt = creature.name;
+  img.classList.add('loading');
+  img.onload  = () => img.classList.remove('loading');
+  img.onerror = () => { img.style.background = 'linear-gradient(135deg,#0d1117 0%,#1e3a5f 100%)'; img.classList.remove('loading'); };
+
+  const info = document.createElement('div');
+  info.className = 'card-info';
+  info.innerHTML = `
+    <h2>${creature.name}</h2>
+    <div class="card-tagline">${creature.tagline}</div>
+    <div class="card-emojis">${creature.emojis.map(e=>`<span>${e}</span>`).join('')}</div>
+  `;
+
+  const ss = document.createElement('div');
+  ss.className = 'stamp stamp-smash';
+  ss.textContent = 'SMASH';
+
+  const sp = document.createElement('div');
+  sp.className = 'stamp stamp-pass';
+  sp.textContent = 'PASS';
+
+  card.appendChild(img);
+  card.appendChild(info);
+  card.appendChild(ss);
+  card.appendChild(sp);
+  return card;
+}
+
+function bindDrag(card) {
+  card.addEventListener('mousedown',  onStart);
+  card.addEventListener('touchstart', onStart, { passive: true });
+}
+
+function onStart(e) {
+  if (dragging) return;
+  dragging = true;
+  const pt = e.touches ? e.touches[0] : e;
+  startX = pt.clientX;
+  curX = 0;
+  topEl.style.transition = 'none';
+  document.addEventListener('mousemove',  onMove);
+  document.addEventListener('mouseup',    onEnd);
+  document.addEventListener('touchmove',  onMove, { passive: true });
+  document.addEventListener('touchend',   onEnd);
+}
+
+function onMove(e) {
+  if (!dragging) return;
+  const pt = e.touches ? e.touches[0] : e;
+  curX = pt.clientX - startX;
+  const rot = curX * 0.07;
+  topEl.style.transform = `translateX(${curX}px) rotate(${rot}deg)`;
+  const ratio = Math.min(Math.abs(curX) / 90, 1);
+  const ss = topEl.querySelector('.stamp-smash');
+  const sp = topEl.querySelector('.stamp-pass');
+  if (curX > 15)       { ss.style.opacity = ratio; sp.style.opacity = 0; }
+  else if (curX < -15) { sp.style.opacity = ratio; ss.style.opacity = 0; }
+  else                 { ss.style.opacity = 0;      sp.style.opacity = 0; }
+}
+
+function onEnd() {
+  if (!dragging) return;
+  dragging = false;
+  document.removeEventListener('mousemove',  onMove);
+  document.removeEventListener('mouseup',    onEnd);
+  document.removeEventListener('touchmove',  onMove);
+  document.removeEventListener('touchend',   onEnd);
+
+  if      (curX >  80) vote('smash');
+  else if (curX < -80) vote('pass');
+  else {
+    topEl.style.transition = 'transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275)';
+    topEl.style.transform = '';
+    topEl.querySelector('.stamp-smash').style.opacity = 0;
+    topEl.querySelector('.stamp-pass').style.opacity  = 0;
   }
 }
 
 function vote(type) {
-  if (!deck.length) return;
+  if (!deck.length || !topEl) return;
 
-  const card = document.getElementById('stack').querySelector('.card:not(.card-bg-2):not(.card-bg-3)') || topCard;
-  if (!card) return;
+  const card = topEl;
+  card.querySelector('.stamp-' + (type === 'smash' ? 'smash' : 'pass')).style.opacity = 1;
+  card.querySelector('.stamp-' + (type === 'smash' ? 'pass' : 'smash')).style.opacity = 0;
 
-  // update stamps before animating
-  const smashStamp = card.querySelector('#stamp-smash');
-  const passStamp  = card.querySelector('#stamp-pass');
-  if (type === 'smash') { smashStamp.style.opacity = 1; passStamp.style.opacity = 0; }
-  else                  { passStamp.style.opacity = 1;  smashStamp.style.opacity = 0; }
-
-  card.style.transition = '';
+  card.style.transition = 'none';
+  card.style.pointerEvents = 'none';
   card.classList.add(type === 'smash' ? 'fly-right' : 'fly-left');
 
-  const creature = deck.shift();
-  results.push({ creature, type });
+  const gone = deck.shift();
+  results.push({ creature: gone, type });
 
-  if (type === 'smash') { smash++; document.getElementById('smash-count').textContent = smash; }
-  else                  { pass++;  document.getElementById('pass-count').textContent = pass; }
+  if (type === 'smash') { smashCount++; document.getElementById('smash-n').textContent = smashCount; }
+  else                  { passCount++;  document.getElementById('pass-n').textContent  = passCount; }
 
-  // update dots
-  const dotIdx = results.length - 1;
-  const dot = document.getElementById(`dot-${dotIdx}`);
-  if (dot) {
-    dot.classList.remove('current');
-    dot.classList.add(type === 'smash' ? 'done-smash' : 'done-pass');
-  }
-  const nextDot = document.getElementById(`dot-${dotIdx + 1}`);
-  if (nextDot) nextDot.classList.add('current');
+  // dots
+  const idx = results.length - 1;
+  const dot = document.getElementById('dot' + idx);
+  if (dot) { dot.classList.remove('active'); dot.classList.add(type === 'smash' ? 'smashed' : 'passed'); }
+  const next = document.getElementById('dot' + (idx + 1));
+  if (next) next.classList.add('active');
 
   card.addEventListener('animationend', () => {
     card.remove();
-    if (deck.length === 0) {
-      showResults();
-    } else {
-      renderStack();
+    if (!deck.length) { showDone(); return; }
+
+    const stack = document.getElementById('stack');
+
+    // Promote depth-1 → depth-0 (new top card)
+    const d1 = stack.querySelector('.depth-1');
+    if (d1) {
+      d1.classList.remove('depth-1');
+      d1.dataset.depth = 0;
+      d1.classList.add('depth-0', 'promote-0');
+      d1.style.pointerEvents = '';
+      d1.addEventListener('animationend', () => d1.classList.remove('promote-0'), { once: true });
+      topEl = d1;
+      bindDrag(d1);
+    }
+
+    // Promote depth-2 → depth-1
+    const d2 = stack.querySelector('.depth-2');
+    if (d2) {
+      d2.classList.remove('depth-2');
+      d2.dataset.depth = 1;
+      d2.classList.add('depth-1', 'promote-1');
+      d2.addEventListener('animationend', () => d2.classList.remove('promote-1'), { once: true });
+    }
+
+    // Add new depth-2 card if available
+    if (deck.length >= 3) {
+      const newCard = makeCard(deck[2], 2);
+      stack.insertBefore(newCard, stack.firstChild);
     }
   }, { once: true });
 }
 
-function showResults() {
-  document.getElementById('stack').style.display = 'none';
-  document.getElementById('buttons').style.display = 'none';
-  document.getElementById('dots').style.display = 'none';
-
-  const done = document.getElementById('done-screen');
+function showDone() {
+  ['stack-wrap','dots','btn-row'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.querySelector('.hint').style.display = 'none';
+  const done = document.getElementById('done');
   done.style.display = 'flex';
-
   const grid = document.getElementById('result-grid');
   grid.innerHTML = '';
   results.forEach(({ creature, type }) => {
     const chip = document.createElement('div');
-    chip.className = 'result-chip ' + (type === 'smash' ? 'chip-smash' : 'chip-pass');
-    chip.textContent = (type === 'smash' ? '✅ ' : '❌ ') + creature.name;
+    chip.className = 'chip chip-' + type;
+    chip.textContent = (type === 'smash' ? '💚 ' : '💀 ') + creature.name;
     grid.appendChild(chip);
   });
 }
 
 function restart() {
-  document.getElementById('stack').style.display = '';
-  document.getElementById('buttons').style.display = '';
-  document.getElementById('dots').style.display = '';
-  document.getElementById('done-screen').style.display = 'none';
-  buildDeck();
+  ['stack-wrap','dots','btn-row'].forEach(id => document.getElementById(id).style.display = '');
+  document.querySelector('.hint').style.display = '';
+  document.getElementById('done').style.display = 'none';
+  init();
 }
 
-buildDeck();
+init();
 </script>
 
 </body>
