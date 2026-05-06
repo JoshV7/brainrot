@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brainrot Amore 💚❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #00e676;
+    --red: #ff1744;
+    --gold: #ffd600;
+    --bg: #0a0a0f;
+    --card-bg: #13131a;
+    --text: #f0f0f0;
+    --muted: #555;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘DM Sans’, sans-serif;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+overflow: hidden;
+position: relative;
+}
+
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background:
+radial-gradient(ellipse at 20% 50%, rgba(0,230,118,0.06) 0%, transparent 60%),
+radial-gradient(ellipse at 80% 50%, rgba(255,23,68,0.06) 0%, transparent 60%);
+pointer-events: none;
+z-index: 0;
+}
+
+header {
+z-index: 10;
+padding: 20px 0 10px;
+text-align: center;
+}
+
+header h1 {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 2.8rem;
+letter-spacing: 4px;
+background: linear-gradient(135deg, #00e676, #ffd600, #ff1744);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+line-height: 1;
+}
+
+header p {
+font-size: 0.78rem;
+color: var(–muted);
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-top: 4px;
+}
+
+.score-bar {
+display: flex;
+gap: 24px;
+z-index: 10;
+margin: 6px 0 10px;
+font-family: ‘Bebas Neue’, cursive;
+font-size: 1.1rem;
+letter-spacing: 2px;
+}
+
+.score-bar .smash { color: var(–green); }
+.score-bar .pass  { color: var(–red); }
+
+/* CARD STACK */
+.stack {
+position: relative;
+width: 340px;
+height: 460px;
+z-index: 10;
+margin-top: 4px;
+}
+
+.card {
+position: absolute;
+inset: 0;
+border-radius: 20px;
+overflow: hidden;
+background: var(–card-bg);
+box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+cursor: grab;
+user-select: none;
+transition: transform 0.15s ease;
+will-change: transform;
+border: 1px solid rgba(255,255,255,0.06);
+}
+
+.card:active { cursor: grabbing; }
+
+.card img {
+width: 100%;
+height: 330px;
+object-fit: cover;
+object-position: center top;
+display: block;
+pointer-events: none;
+}
+
+.card-info {
+padding: 14px 18px 12px;
+}
+
+.card-info h2 {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 1.6rem;
+letter-spacing: 2px;
+line-height: 1;
+color: var(–text);
+}
+
+.card-info .tagline {
+font-size: 0.8rem;
+color: #aaa;
+margin-top: 4px;
+font-style: italic;
+}
+
+.card-info .emoji-row {
+margin-top: 8px;
+font-size: 1.3rem;
+display: flex;
+gap: 6px;
+}
+
+/* vote overlays */
+.stamp {
+position: absolute;
+top: 30px;
+font-family: ‘Bebas Neue’, cursive;
+font-size: 3rem;
+letter-spacing: 4px;
+border: 4px solid;
+padding: 4px 14px;
+border-radius: 8px;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.1s;
+transform: rotate(-15deg);
+}
+
+.stamp.smash-stamp {
+left: 20px;
+color: var(–green);
+border-color: var(–green);
+transform: rotate(-15deg);
+}
+
+.stamp.pass-stamp {
+right: 20px;
+color: var(–red);
+border-color: var(–red);
+transform: rotate(15deg);
+}
+
+/* bg stack cards */
+.card-bg-2 {
+transform: scale(0.95) translateY(12px);
+z-index: -1;
+filter: brightness(0.6);
+}
+
+.card-bg-3 {
+transform: scale(0.90) translateY(24px);
+z-index: -2;
+filter: brightness(0.35);
+}
+
+/* BUTTONS */
+.buttons {
+display: flex;
+gap: 32px;
+margin-top: 22px;
+z-index: 10;
+}
+
+.btn {
+width: 68px;
+height: 68px;
+border-radius: 50%;
+border: none;
+font-size: 1.8rem;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: transform 0.15s, box-shadow 0.15s;
+position: relative;
+overflow: hidden;
+}
+
+.btn::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+border-radius: 50%;
+background: rgba(255,255,255,0.12);
+transform: scale(0);
+transition: transform 0.25s;
+}
+
+.btn:hover::before { transform: scale(1); }
+.btn:active { transform: scale(0.88); }
+
+.btn-pass {
+background: rgba(255,23,68,0.15);
+border: 2px solid var(–red);
+color: var(–red);
+box-shadow: 0 0 20px rgba(255,23,68,0.2);
+}
+
+.btn-pass:hover {
+box-shadow: 0 0 30px rgba(255,23,68,0.45);
+}
+
+.btn-smash {
+background: rgba(0,230,118,0.15);
+border: 2px solid var(–green);
+color: var(–green);
+box-shadow: 0 0 20px rgba(0,230,118,0.2);
+}
+
+.btn-smash:hover {
+box-shadow: 0 0 30px rgba(0,230,118,0.45);
+}
+
+/* swipe animations */
+.fly-left {
+animation: flyLeft 0.45s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+.fly-right {
+animation: flyRight 0.45s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+@keyframes flyLeft {
+0%   { transform: translateX(0) rotate(0deg); opacity: 1; }
+100% { transform: translateX(-140%) rotate(-28deg); opacity: 0; }
+}
+
+@keyframes flyRight {
+0%   { transform: translateX(0) rotate(0deg); opacity: 1; }
+100% { transform: translateX(140%) rotate(28deg); opacity: 0; }
+}
+
+/* result screen */
+.done-screen {
+display: none;
+flex-direction: column;
+align-items: center;
+text-align: center;
+z-index: 10;
+margin-top: 40px;
+padding: 0 20px;
+}
+
+.done-screen h2 {
+font-family: ‘Bebas Neue’, cursive;
+font-size: 3rem;
+letter-spacing: 4px;
+background: linear-gradient(135deg, #00e676, #ffd600);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.done-screen p { color: #aaa; margin-top: 8px; font-size: 0.9rem; }
+
+.result-grid {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+justify-content: center;
+margin-top: 20px;
+max-width: 360px;
+}
+
+.result-chip {
+padding: 6px 14px;
+border-radius: 50px;
+font-size: 0.8rem;
+font-weight: 600;
+}
+
+.chip-smash { background: rgba(0,230,118,0.15); border: 1px solid var(–green); color: var(–green); }
+.chip-pass  { background: rgba(255,23,68,0.15);  border: 1px solid var(–red);   color: var(–red); }
+
+.btn-restart {
+margin-top: 22px;
+padding: 12px 32px;
+border-radius: 50px;
+background: linear-gradient(135deg, #00e676, #ffd600);
+border: none;
+color: #000;
+font-family: ‘Bebas Neue’, cursive;
+font-size: 1.2rem;
+letter-spacing: 2px;
+cursor: pointer;
+transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-restart:hover {
+transform: scale(1.05);
+box-shadow: 0 6px 30px rgba(0,230,118,0.4);
+}
+
+/* progress dots */
+.dots {
+display: flex;
+gap: 5px;
+z-index: 10;
+margin-top: 14px;
+}
+
+.dot {
+width: 7px; height: 7px;
+border-radius: 50%;
+background: var(–muted);
+transition: background 0.3s;
+}
+
+.dot.done-smash { background: var(–green); }
+.dot.done-pass  { background: var(–red); }
+.dot.current    { background: var(–gold); width: 18px; border-radius: 4px; }
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>🇮🇹 Brainrot Amore 🇮🇹</h1>
+  <p>Smash or Pass — Italian Brainrot Edition</p>
+</header>
+
+<div class="score-bar">
+  <span class="smash">✅ SMASH: <span id="smash-count">0</span></span>
+  <span class="pass">❌ PASS: <span id="pass-count">0</span></span>
+</div>
+
+<div class="stack" id="stack">
+  <!-- Cards injected by JS -->
+</div>
+
+<div class="dots" id="dots"></div>
+
+<div class="buttons" id="buttons">
+  <button class="btn btn-pass"  onclick="vote('pass')">💀</button>
+  <button class="btn btn-smash" onclick="vote('smash')">💚</button>
+</div>
+
+<div class="done-screen" id="done-screen">
+  <h2>Finito! 🎉</h2>
+  <p>You've judged all the creatures of the Italian Brainrot universe.</p>
+  <div class="result-grid" id="result-grid"></div>
+  <button class="btn-restart" onclick="restart()">🔄 GIOCA DI NUOVO</button>
+</div>
+
+<script>
+const creatures = [
+  {
+    name: "Bombardiro Crocodilo",
+    tagline: "Coccodrillo dell'aria, maestro della distruzione",
+    emojis: ["✈️","🐊","💣"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bombardiro_Crocodilo.jpg/400px-Bombardiro_Crocodilo.jpg",
+    fallback: "https://i.imgur.com/placeholder.jpg"
+  },
+  {
+    name: "Tralalero Tralala",
+    tagline: "Il re delle scarpe di squalo",
+    emojis: ["🦈","👟","🎵"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Tralalero_Tralala.jpg/400px-Tralalero_Tralala.jpg",
+    fallback: null
+  },
+  {
+    name: "Cappuccino Assassino",
+    tagline: "Caffè letale, morte dolcissima",
+    emojis: ["☕","🗡️","😈"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Cappuccino_Assassino.jpg/400px-Cappuccino_Assassino.jpg",
+    fallback: null
+  },
+  {
+    name: "Tung Tung Tung Sahur",
+    tagline: "Il bambino che non si ferma mai",
+    emojis: ["🥁","🌙","😤"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Tung_Tung_Tung_Sahur.jpg/400px-Tung_Tung_Tung_Sahur.jpg",
+    fallback: null
+  },
+  {
+    name: "Burbaloni Luigiloni",
+    tagline: "Uomo pallone di lusso assoluto",
+    emojis: ["🎈","🤌","💨"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Burbaloni_Luigiloni.jpg/400px-Burbaloni_Luigiloni.jpg",
+    fallback: null
+  },
+  {
+    name: "Frigo Camelo",
+    tagline: "Il freddo del deserto — o il contrario?",
+    emojis: ["🐪","❄️","🧊"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Frigo_Camelo.jpg/400px-Frigo_Camelo.jpg",
+    fallback: null
+  },
+  {
+    name: "Glorbo Fruttodrillo",
+    tagline: "Rettile tropicale, cuore di frutta",
+    emojis: ["🍉","🐊","🌺"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Glorbo_Fruttodrillo.jpg/400px-Glorbo_Fruttodrillo.jpg",
+    fallback: null
+  },
+  {
+    name: "Lirilì Laralà",
+    tagline: "La dea della collina cantante",
+    emojis: ["🎶","🌄","✨"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Liril%C3%AC_Laral%C3%A0.jpg/400px-Liril%C3%AC_Laral%C3%A0.jpg",
+    fallback: null
+  },
+  {
+    name: "Trippi Troppi",
+    tagline: "Due teste, un solo sogno allucinante",
+    emojis: ["🤯","🐸","🌀"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trippi_Troppi.jpg/400px-Trippi_Troppi.jpg",
+    fallback: null
+  },
+  {
+    name: "Bombombini Gusini",
+    tagline: "Oca bomba della pace perpetua",
+    emojis: ["🦢","💥","🕊️"],
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Bombombini_Gusini.jpg/400px-Bombombini_Gusini.jpg",
+    fallback: null
+  }
+];
+
+// Use placeholder images since wikimedia paths won't work — generate themed SVG placeholders
+function getPlaceholderSVG(name, emojis) {
+  const colors = [
+    ['#1a1a2e','#e94560'],
+    ['#0f3460','#16213e'],
+    ['#1b262c','#0f3460'],
+    ['#2d132c','#ee4540'],
+    ['#1c1c1c','#f5a623'],
+    ['#0a3d62','#60a3bc'],
+    ['#1e272e','#d2dae2'],
+    ['#2c3e50','#e74c3c'],
+    ['#16213e','#0f3460'],
+    ['#2d3436','#00b894']
+  ];
+  const idx = creatures.findIndex(c => c.name === name) % colors.length;
+  const [bg, accent] = colors[idx];
+  const emoji = emojis[0] || '🇮🇹';
+  const svgContent = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="340" height="330" viewBox="0 0 340 330">
+      <defs>
+        <radialGradient id="g${idx}" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="${accent}" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="${bg}"/>
+        </radialGradient>
+      </defs>
+      <rect width="340" height="330" fill="url(#g${idx})"/>
+      <rect x="0" y="0" width="340" height="330" fill="${bg}" opacity="0.4"/>
+      <!-- noise pattern suggestion -->
+      <text x="170" y="170" font-size="100" text-anchor="middle" dominant-baseline="middle">${emoji}</text>
+      <text x="170" y="260" font-size="14" fill="rgba(255,255,255,0.5)" text-anchor="middle" font-family="sans-serif">[ AI IMAGE ]</text>
+    </svg>
+  `;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgContent);
+}
+
+let deck = [];
+let results = [];
+let smash = 0, pass = 0;
+let isDragging = false;
+let startX = 0, currentX = 0;
+let topCard = null;
+
+function buildDeck() {
+  deck = [...creatures];
+  results = [];
+  smash = 0; pass = 0;
+  document.getElementById('smash-count').textContent = 0;
+  document.getElementById('pass-count').textContent = 0;
+  renderDots();
+  renderStack();
+}
+
+function renderDots() {
+  const dots = document.getElementById('dots');
+  dots.innerHTML = '';
+  deck.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' current' : '');
+    d.id = `dot-${i}`;
+    dots.appendChild(d);
+  });
+}
+
+function renderStack() {
+  const stack = document.getElementById('stack');
+  stack.innerHTML = '';
+
+  const visible = deck.slice(0, 3);
+  visible.forEach((creature, i) => {
+    const card = document.createElement('div');
+    card.className = 'card' + (i === 1 ? ' card-bg-2' : i === 2 ? ' card-bg-3' : '');
+    card.style.zIndex = 3 - i;
+
+    const img = document.createElement('img');
+    img.src = getPlaceholderSVG(creature.name, creature.emojis);
+    img.alt = creature.name;
+
+    const info = document.createElement('div');
+    info.className = 'card-info';
+    info.innerHTML = `
+      <h2>${creature.name}</h2>
+      <div class="tagline">${creature.tagline}</div>
+      <div class="emoji-row">${creature.emojis.map(e => `<span>${e}</span>`).join('')}</div>
+    `;
+
+    const smashStamp = document.createElement('div');
+    smashStamp.className = 'stamp smash-stamp';
+    smashStamp.textContent = 'SMASH';
+    smashStamp.id = 'stamp-smash';
+
+    const passStamp = document.createElement('div');
+    passStamp.className = 'stamp pass-stamp';
+    passStamp.textContent = 'PASS';
+    passStamp.id = 'stamp-pass';
+
+    card.appendChild(img);
+    card.appendChild(info);
+    card.appendChild(smashStamp);
+    card.appendChild(passStamp);
+
+    if (i === 0) {
+      topCard = card;
+      setupDrag(card);
+    }
+
+    stack.appendChild(card);
+  });
+}
+
+function setupDrag(card) {
+  card.addEventListener('mousedown', dragStart);
+  card.addEventListener('touchstart', dragStart, { passive: true });
+  document.addEventListener('mousemove', dragMove);
+  document.addEventListener('touchmove', dragMove, { passive: true });
+  document.addEventListener('mouseup', dragEnd);
+  document.addEventListener('touchend', dragEnd);
+}
+
+function dragStart(e) {
+  isDragging = true;
+  startX = e.touches ? e.touches[0].clientX : e.clientX;
+  currentX = 0;
+  topCard.style.transition = 'none';
+}
+
+function dragMove(e) {
+  if (!isDragging) return;
+  const x = (e.touches ? e.touches[0].clientX : e.clientX) - startX;
+  currentX = x;
+  const rot = x * 0.08;
+  topCard.style.transform = `translateX(${x}px) rotate(${rot}deg)`;
+
+  const smashStamp = topCard.querySelector('#stamp-smash');
+  const passStamp  = topCard.querySelector('#stamp-pass');
+
+  const ratio = Math.min(Math.abs(x) / 80, 1);
+  if (x > 20) {
+    smashStamp.style.opacity = ratio;
+    passStamp.style.opacity = 0;
+  } else if (x < -20) {
+    passStamp.style.opacity = ratio;
+    smashStamp.style.opacity = 0;
+  } else {
+    smashStamp.style.opacity = 0;
+    passStamp.style.opacity = 0;
+  }
+}
+
+function dragEnd() {
+  if (!isDragging) return;
+  isDragging = false;
+  document.removeEventListener('mousemove', dragMove);
+  document.removeEventListener('touchmove', dragMove);
+  document.removeEventListener('mouseup', dragEnd);
+  document.removeEventListener('touchend', dragEnd);
+
+  if (currentX > 80) {
+    vote('smash');
+  } else if (currentX < -80) {
+    vote('pass');
+  } else {
+    // snap back
+    topCard.style.transition = 'transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    topCard.style.transform = '';
+    topCard.querySelector('#stamp-smash').style.opacity = 0;
+    topCard.querySelector('#stamp-pass').style.opacity = 0;
+  }
+}
+
+function vote(type) {
+  if (!deck.length) return;
+
+  const card = document.getElementById('stack').querySelector('.card:not(.card-bg-2):not(.card-bg-3)') || topCard;
+  if (!card) return;
+
+  // update stamps before animating
+  const smashStamp = card.querySelector('#stamp-smash');
+  const passStamp  = card.querySelector('#stamp-pass');
+  if (type === 'smash') { smashStamp.style.opacity = 1; passStamp.style.opacity = 0; }
+  else                  { passStamp.style.opacity = 1;  smashStamp.style.opacity = 0; }
+
+  card.style.transition = '';
+  card.classList.add(type === 'smash' ? 'fly-right' : 'fly-left');
+
+  const creature = deck.shift();
+  results.push({ creature, type });
+
+  if (type === 'smash') { smash++; document.getElementById('smash-count').textContent = smash; }
+  else                  { pass++;  document.getElementById('pass-count').textContent = pass; }
+
+  // update dots
+  const dotIdx = results.length - 1;
+  const dot = document.getElementById(`dot-${dotIdx}`);
+  if (dot) {
+    dot.classList.remove('current');
+    dot.classList.add(type === 'smash' ? 'done-smash' : 'done-pass');
+  }
+  const nextDot = document.getElementById(`dot-${dotIdx + 1}`);
+  if (nextDot) nextDot.classList.add('current');
+
+  card.addEventListener('animationend', () => {
+    card.remove();
+    if (deck.length === 0) {
+      showResults();
+    } else {
+      renderStack();
+    }
+  }, { once: true });
+}
+
+function showResults() {
+  document.getElementById('stack').style.display = 'none';
+  document.getElementById('buttons').style.display = 'none';
+  document.getElementById('dots').style.display = 'none';
+
+  const done = document.getElementById('done-screen');
+  done.style.display = 'flex';
+
+  const grid = document.getElementById('result-grid');
+  grid.innerHTML = '';
+  results.forEach(({ creature, type }) => {
+    const chip = document.createElement('div');
+    chip.className = 'result-chip ' + (type === 'smash' ? 'chip-smash' : 'chip-pass');
+    chip.textContent = (type === 'smash' ? '✅ ' : '❌ ') + creature.name;
+    grid.appendChild(chip);
+  });
+}
+
+function restart() {
+  document.getElementById('stack').style.display = '';
+  document.getElementById('buttons').style.display = '';
+  document.getElementById('dots').style.display = '';
+  document.getElementById('done-screen').style.display = 'none';
+  buildDeck();
+}
+
+buildDeck();
+</script>
+
+</body>
+</html>
