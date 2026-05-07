@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" style="background:#050810!important;color-scheme:dark!important;">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Brainrot Amore 🇮🇹</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>Brainrot Amore</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --blue: #3b82f6;
-    --blue-bright: #60a5fa;
-    --blue-glow: rgba(59,130,246,0.35);
-    --green: #22c55e;
-    --green-glow: rgba(34,197,94,0.35);
-    --red: #ef4444;
-    --red-glow: rgba(239,68,68,0.35);
-    --bg: #050810;
-    --card: #0f172a;
-    --card-border: rgba(59,130,246,0.2);
-    --text: #f1f5f9;
-    --muted: #475569;
-    --subtle: #1e293b;
-  }
+/* ── HARD RESET – no system theme leakage ── */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+  color-scheme: dark;
+  -webkit-tap-highlight-color: transparent;
+}
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+background: #050810 !important;
+height: 100%;
+color-scheme: dark;
+}
 
-html, body {
+body {
+background: #050810 !important;
+color: #f1f5f9 !important;
+font-family: ‘Outfit’, sans-serif;
 height: 100%;
 width: 100%;
 overflow: hidden;
-background: var(–bg);
-color: var(–text);
-font-family: ‘Outfit’, sans-serif;
 touch-action: none;
+-webkit-text-size-adjust: 100%;
 }
 
+/* Force every element dark */
+body, div, section, header, main, footer, span, p, h1, h2, h3, button {
+background-color: transparent;
+color: inherit;
+}
+
+/* Grid bg */
 body::before {
 content: ‘’;
 position: fixed;
 inset: 0;
 background-image:
-linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
 background-size: 40px 40px;
 pointer-events: none;
 z-index: 0;
@@ -52,13 +55,13 @@ content: ‘’;
 position: fixed;
 inset: 0;
 background:
-radial-gradient(ellipse 70% 40% at 50% 0%, rgba(59,130,246,0.13) 0%, transparent 70%),
-radial-gradient(ellipse 50% 30% at 50% 100%, rgba(99,102,241,0.07) 0%, transparent 70%);
+radial-gradient(ellipse 70% 40% at 50% 0%, rgba(59,130,246,0.15) 0%, transparent 70%),
+radial-gradient(ellipse 50% 30% at 50% 100%, rgba(99,102,241,0.08) 0%, transparent 70%);
 pointer-events: none;
 z-index: 0;
 }
 
-/* –– LAYOUT –– */
+/* ── APP SHELL ── */
 .app {
 position: relative;
 z-index: 1;
@@ -70,21 +73,23 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding: 0 16px;
+background: transparent;
 }
 
-/* –– HEADER –– */
+/* ── HEADER ── */
 header {
 flex-shrink: 0;
 width: 100%;
 text-align: center;
 padding: 14px 0 6px;
+background: transparent;
 }
 
 .logo {
 font-family: ‘Bebas Neue’, cursive;
 font-size: clamp(1.8rem, 8vw, 2.4rem);
 letter-spacing: 5px;
-background: linear-gradient(135deg, var(–blue-bright) 0%, #a78bfa 60%, var(–blue) 100%);
+background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 60%, #3b82f6 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
@@ -93,13 +98,13 @@ line-height: 1;
 
 .sub {
 font-size: 0.62rem;
-color: var(–muted);
+color: #475569;
 letter-spacing: 3px;
 text-transform: uppercase;
-margin-top: 2px;
+margin-top: 3px;
 }
 
-/* –– SCORE –– */
+/* ── SCORE ── */
 .score-row {
 flex-shrink: 0;
 display: flex;
@@ -116,12 +121,22 @@ border-radius: 50px;
 font-family: ‘Bebas Neue’, cursive;
 font-size: 0.95rem;
 letter-spacing: 1.5px;
+border: 1px solid;
 }
 
-.score-pill.s { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: var(–green); }
-.score-pill.p { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.3);  color: var(–red); }
+.score-pill.s {
+background: rgba(34,197,94,0.12) !important;
+border-color: rgba(34,197,94,0.35);
+color: #22c55e !important;
+}
 
-/* –– STACK AREA –– */
+.score-pill.p {
+background: rgba(239,68,68,0.12) !important;
+border-color: rgba(239,68,68,0.35);
+color: #ef4444 !important;
+}
+
+/* ── STACK AREA ── */
 .stack-wrap {
 flex: 1;
 width: 100%;
@@ -130,25 +145,26 @@ display: flex;
 align-items: center;
 justify-content: center;
 min-height: 0;
+background: transparent;
 }
 
 .stack {
 position: relative;
 width: 100%;
 max-width: 360px;
-/* responsive height: fills whatever space remains */
 height: min(460px, calc(100vh - 270px));
+background: transparent;
 }
 
-/* –– CARDS –– */
+/* ── CARDS ── */
 .card {
 position: absolute;
 inset: 0;
 border-radius: 22px;
 overflow: hidden;
-background: var(–card);
-border: 1px solid var(–card-border);
-box-shadow: 0 8px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(59,130,246,0.07);
+background: #0f172a !important;
+border: 1px solid rgba(59,130,246,0.22);
+box-shadow: 0 8px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(59,130,246,0.07);
 display: flex;
 flex-direction: column;
 cursor: grab;
@@ -159,22 +175,19 @@ will-change: transform;
 
 .card:active { cursor: grabbing; }
 
-/* depth layers — NOT on the active card */
+.card.depth-0 { z-index: 3; }
 .card.depth-1 {
 z-index: 2;
 transform: scale(0.94) translateY(14px);
-filter: brightness(0.5) saturate(0.4);
+filter: brightness(0.45) saturate(0.3);
 pointer-events: none;
 }
-
 .card.depth-2 {
 z-index: 1;
 transform: scale(0.88) translateY(28px);
-filter: brightness(0.28) saturate(0.2);
+filter: brightness(0.25) saturate(0.15);
 pointer-events: none;
 }
-
-.card.depth-0 { z-index: 3; }
 
 .card img {
 width: 100%;
@@ -184,29 +197,28 @@ object-fit: cover;
 object-position: center center;
 display: block;
 pointer-events: none;
-background: var(–subtle);
+background: #1e293b !important;
 transition: opacity 0.3s;
 }
-
-.card img.loading { opacity: 0.5; }
+.card img.loading { opacity: 0.4; }
 
 .card-info {
 flex-shrink: 0;
 padding: 11px 16px 13px;
-background: linear-gradient(180deg, rgba(15,23,42,0) 0%, rgba(15,23,42,0.98) 20%);
+background: linear-gradient(180deg, rgba(15,23,42,0) 0%, #0f172a 25%) !important;
 }
 
 .card-info h2 {
 font-family: ‘Bebas Neue’, cursive;
 font-size: clamp(1.25rem, 5.5vw, 1.6rem);
 letter-spacing: 2px;
-color: var(–text);
+color: #f1f5f9 !important;
 line-height: 1.1;
 }
 
 .card-tagline {
 font-size: 0.72rem;
-color: #64748b;
+color: #64748b !important;
 margin-top: 3px;
 font-style: italic;
 }
@@ -218,9 +230,10 @@ margin-top: 7px;
 font-size: 1.05rem;
 }
 
-/* –– STAMPS –– */
+/* ── STAMPS ── */
 .stamp {
 position: absolute;
+top: 22px;
 font-family: ‘Bebas Neue’, cursive;
 font-size: clamp(1.8rem, 7vw, 2.6rem);
 letter-spacing: 3px;
@@ -231,28 +244,29 @@ opacity: 0;
 pointer-events: none;
 z-index: 10;
 transition: opacity 0.07s;
-top: 22px;
 }
 
 .stamp-smash {
 left: 14px;
-color: var(–green);
-border-color: var(–green);
+color: #22c55e !important;
+border-color: #22c55e;
 transform: rotate(-12deg);
-box-shadow: 0 0 16px var(–green-glow);
+box-shadow: 0 0 16px rgba(34,197,94,0.5);
 text-shadow: 0 2px 10px rgba(34,197,94,0.5);
+background: transparent !important;
 }
 
 .stamp-pass {
 right: 14px;
-color: var(–red);
-border-color: var(–red);
+color: #ef4444 !important;
+border-color: #ef4444;
 transform: rotate(12deg);
-box-shadow: 0 0 16px var(–red-glow);
+box-shadow: 0 0 16px rgba(239,68,68,0.5);
 text-shadow: 0 2px 10px rgba(239,68,68,0.5);
+background: transparent !important;
 }
 
-/* –– DOTS –– */
+/* ── DOTS ── */
 .dots {
 flex-shrink: 0;
 display: flex;
@@ -261,43 +275,46 @@ flex-wrap: wrap;
 justify-content: center;
 max-width: 260px;
 margin: 4px 0 2px;
+background: transparent;
 }
 
 .dot {
 width: 7px; height: 7px;
 border-radius: 50%;
-background: var(–subtle);
+background: #1e293b !important;
 border: 1px solid #334155;
 transition: all 0.28s ease;
 }
 
-.dot.active  { width: 16px; border-radius: 4px; background: var(–blue); border-color: var(–blue); box-shadow: 0 0 8px var(–blue-glow); }
-.dot.smashed { background: var(–green); border-color: var(–green); }
-.dot.passed  { background: var(–red);   border-color: var(–red); }
+.dot.active  { width: 16px; border-radius: 4px; background: #3b82f6 !important; border-color: #3b82f6; box-shadow: 0 0 8px rgba(59,130,246,0.5); }
+.dot.smashed { background: #22c55e !important; border-color: #22c55e; }
+.dot.passed  { background: #ef4444 !important; border-color: #ef4444; }
 
-/* –– HINT –– */
+/* ── HINT ── */
 .hint {
 flex-shrink: 0;
 font-size: 0.6rem;
-color: #334155;
+color: #334155 !important;
 letter-spacing: 2px;
 text-transform: uppercase;
 margin-bottom: 6px;
+background: transparent;
 }
 
-/* –– BUTTONS –– */
+/* ── BUTTONS ── */
 .btn-row {
 flex-shrink: 0;
 display: flex;
 align-items: center;
 gap: 28px;
 padding: 10px 0 18px;
+background: transparent;
 }
 
 .btn {
 width: 66px; height: 66px;
 border-radius: 50%;
-border: none;
+border: 2px solid;
 font-size: 1.7rem;
 cursor: pointer;
 display: flex;
@@ -310,44 +327,37 @@ transition: transform 0.12s, box-shadow 0.15s;
 .btn:active { transform: scale(0.82) !important; }
 
 .btn-pass {
-background: rgba(239,68,68,0.1);
-border: 2px solid rgba(239,68,68,0.45);
-color: var(–red);
-box-shadow: 0 0 18px rgba(239,68,68,0.12);
+background: rgba(239,68,68,0.12) !important;
+border-color: rgba(239,68,68,0.5);
+color: #ef4444 !important;
+box-shadow: 0 0 18px rgba(239,68,68,0.15);
 }
 
 .btn-smash {
-background: rgba(34,197,94,0.1);
-border: 2px solid rgba(34,197,94,0.45);
-color: var(–green);
-box-shadow: 0 0 18px rgba(34,197,94,0.12);
+background: rgba(34,197,94,0.12) !important;
+border-color: rgba(34,197,94,0.5);
+color: #22c55e !important;
+box-shadow: 0 0 18px rgba(34,197,94,0.15);
 }
 
-.btn-pass:hover  { box-shadow: 0 0 28px var(–red-glow);   transform: scale(1.07); }
-.btn-smash:hover { box-shadow: 0 0 28px var(–green-glow); transform: scale(1.07); }
-
-/* –– ANIMATIONS –– */
-@keyframes flyLeft {
-to { transform: translateX(-130vw) rotate(-28deg) scale(0.75); opacity: 0; }
+/* ── ANIMATIONS ── */
+@keyframes flyLeft  { to { transform: translateX(-130vw) rotate(-28deg) scale(0.75); opacity: 0; } }
+@keyframes flyRight { to { transform: translateX(130vw)  rotate(28deg)  scale(0.75); opacity: 0; } }
+@keyframes promoteTop {
+from { transform: scale(0.94) translateY(14px); filter: brightness(0.45) saturate(0.3); }
+to   { transform: scale(1) translateY(0);        filter: brightness(1) saturate(1); }
 }
-@keyframes flyRight {
-to { transform: translateX(130vw) rotate(28deg) scale(0.75); opacity: 0; }
-}
-@keyframes promoteCard {
-from { transform: scale(0.94) translateY(14px); filter: brightness(0.5) saturate(0.4); }
-to   { transform: scale(1) translateY(0); filter: brightness(1) saturate(1); }
-}
-@keyframes promoteCard2 {
-from { transform: scale(0.88) translateY(28px); filter: brightness(0.28) saturate(0.2); }
-to   { transform: scale(0.94) translateY(14px); filter: brightness(0.5) saturate(0.4); }
+@keyframes promoteMid {
+from { transform: scale(0.88) translateY(28px); filter: brightness(0.25) saturate(0.15); }
+to   { transform: scale(0.94) translateY(14px);  filter: brightness(0.45) saturate(0.3); }
 }
 
-.fly-left  { animation: flyLeft  0.40s cubic-bezier(0.55,0,1,0.45) forwards; }
-.fly-right { animation: flyRight 0.40s cubic-bezier(0.55,0,1,0.45) forwards; }
-.promote-0 { animation: promoteCard  0.36s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-.promote-1 { animation: promoteCard2 0.36s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+.fly-left    { animation: flyLeft    0.40s cubic-bezier(0.55,0,1,0.45) forwards; }
+.fly-right   { animation: flyRight   0.40s cubic-bezier(0.55,0,1,0.45) forwards; }
+.promote-top { animation: promoteTop 0.36s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+.promote-mid { animation: promoteMid 0.36s cubic-bezier(0.34,1.2,0.64,1) forwards; }
 
-/* –– DONE SCREEN –– */
+/* ── DONE SCREEN ── */
 .done-screen {
 display: none;
 flex-direction: column;
@@ -358,19 +368,25 @@ width: 100%;
 flex: 1;
 overflow-y: auto;
 padding: 24px 0 20px;
+background: transparent;
 }
 
 .done-title {
 font-family: ‘Bebas Neue’, cursive;
 font-size: clamp(2rem, 9vw, 3rem);
 letter-spacing: 4px;
-background: linear-gradient(135deg, var(–blue-bright), #a78bfa);
+background: linear-gradient(135deg, #60a5fa, #a78bfa);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 }
 
-.done-sub { color: var(–muted); font-size: 0.8rem; margin-top: 6px; line-height: 1.4; }
+.done-sub {
+color: #475569 !important;
+font-size: 0.8rem;
+margin-top: 6px;
+line-height: 1.4;
+}
 
 .result-grid {
 display: flex;
@@ -387,28 +403,26 @@ padding: 5px 13px;
 border-radius: 50px;
 font-size: 0.73rem;
 font-weight: 600;
+border: 1px solid;
 }
 
-.chip-smash { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.35); color: var(–green); }
-.chip-pass  { background: rgba(239,68,68,0.1);  border: 1px solid rgba(239,68,68,0.35);  color: var(–red); }
+.chip-smash { background: rgba(34,197,94,0.12) !important; border-color: rgba(34,197,94,0.4); color: #22c55e !important; }
+.chip-pass  { background: rgba(239,68,68,0.12)  !important; border-color: rgba(239,68,68,0.4);  color: #ef4444 !important; }
 
 .btn-restart {
 margin-top: 24px;
 padding: 13px 36px;
 border-radius: 50px;
-background: linear-gradient(135deg, var(–blue), #6366f1);
+background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
 border: none;
-color: #fff;
+color: #ffffff !important;
 font-family: ‘Bebas Neue’, cursive;
 font-size: 1.1rem;
 letter-spacing: 2px;
 cursor: pointer;
 transition: transform 0.15s, box-shadow 0.15s;
-box-shadow: 0 0 28px var(–blue-glow);
--webkit-tap-highlight-color: transparent;
+box-shadow: 0 0 28px rgba(59,130,246,0.4);
 }
-
-.btn-restart:hover { transform: scale(1.05); box-shadow: 0 0 50px var(–blue-glow); }
 </style>
 
 </head>
@@ -449,228 +463,171 @@ box-shadow: 0 0 28px var(–blue-glow);
 
 <script>
 const BASE = 'https://static.animalbrainrot.com/images/';
-
 const creatures = [
-  { name:'Tralalero Tralala',      tagline:'Shark in Nikes — chaos at every step',              emojis:['🦈','👟','🎵'], img:BASE+'Tralalero%20Tralala.webp' },
-  { name:'Bombardiro Crocodillo',  tagline:'Flying alligator of absolute destruction',           emojis:['✈️','🐊','💣'], img:BASE+'Bombardino%20Crocodillo.webp' },
-  { name:'Tung Tung Tung Sahur',   tagline:'Terrifying anomaly that only appears at dawn',       emojis:['🥁','🌙','😤'], img:BASE+'Tung%20Tung%20Tung%20Sahur.webp' },
-  { name:'Brr Brr Patapim',        tagline:'Forest being with tangled roots & an arcane accent', emojis:['🌿','🦧','🗣️'], img:BASE+'Brr%20Brr%20Patapim.webp' },
-  { name:'Lirili Larila',          tagline:'Cactus elephant wandering deserts in sandals',        emojis:['🌵','🐘','🩴'], img:BASE+'Lirili%20Larila.webp' },
-  { name:'Bombombini Gusini',      tagline:'Goose bomber — adopted brother of Bombardiro',       emojis:['🦢','💥','🕊️'], img:BASE+'Bombombini%20Gusini.webp' },
-  { name:'Ballerina Capuchina',    tagline:'Graceful wife of Cappuccino Assassino',               emojis:['🩰','☕','💃'], img:BASE+'Ballerina%20Capuchina.webp' },
-  { name:'Glorbo Fruttodrillo',    tagline:'Watermelon-croc ruler of the swamps',                emojis:['🍉','🐊','🌺'], img:BASE+'Glorbo%20Fruttodrillo.webp' },
-  { name:'Boneca Ambalabu',        tagline:'Frog-tyre hybrid of the Brazilian forests',          emojis:['🐸','🔄','🌳'], img:BASE+'Boneca%20Ambalabu.webp' },
-  { name:'Chimpanzini Bananini',   tagline:'Wa wa wa — banana monkey chaos energy',              emojis:['🐒','🍌','🎵'], img:BASE+'Chimpanzini%20Bananini.webp' },
+  { name:'Tralalero Tralala',     tagline:'Shark in Nikes — chaos at every step',               emojis:['🦈','👟','🎵'], img:BASE+'Tralalero%20Tralala.webp' },
+  { name:'Bombardiro Crocodillo', tagline:'Flying alligator of absolute destruction',            emojis:['✈️','🐊','💣'], img:BASE+'Bombardino%20Crocodillo.webp' },
+  { name:'Tung Tung Tung Sahur',  tagline:'Terrifying anomaly that only appears at dawn',        emojis:['🥁','🌙','😤'], img:BASE+'Tung%20Tung%20Tung%20Sahur.webp' },
+  { name:'Brr Brr Patapim',       tagline:'Forest being with tangled roots & arcane accent',    emojis:['🌿','🦧','🗣️'], img:BASE+'Brr%20Brr%20Patapim.webp' },
+  { name:'Lirili Larila',         tagline:'Cactus elephant wandering deserts in sandals',        emojis:['🌵','🐘','🩴'], img:BASE+'Lirili%20Larila.webp' },
+  { name:'Bombombini Gusini',     tagline:'Goose bomber — adopted brother of Bombardiro',        emojis:['🦢','💥','🕊️'], img:BASE+'Bombombini%20Gusini.webp' },
+  { name:'Ballerina Capuchina',   tagline:'Graceful wife of Cappuccino Assassino',               emojis:['🩰','☕','💃'], img:BASE+'Ballerina%20Capuchina.webp' },
+  { name:'Glorbo Fruttodrillo',   tagline:'Watermelon-croc ruler of the swamps',                emojis:['🍉','🐊','🌺'], img:BASE+'Glorbo%20Fruttodrillo.webp' },
+  { name:'Boneca Ambalabu',       tagline:'Frog-tyre hybrid of the Brazilian forests',           emojis:['🐸','🔄','🌳'], img:BASE+'Boneca%20Ambalabu.webp' },
+  { name:'Chimpanzini Bananini',  tagline:'Wa wa wa — banana monkey chaos energy',               emojis:['🐒','🍌','🎵'], img:BASE+'Chimpanzini%20Bananini.webp' },
 ];
 
-let deck = [];
-let results = [];
-let smashCount = 0, passCount = 0;
-let dragging = false;
-let startX = 0;
-let curX = 0;
-let topEl = null;
+let deck=[], results=[], smashCount=0, passCount=0;
+let dragging=false, startX=0, curX=0, topEl=null;
 
 function init() {
-  deck = [...creatures];
-  results = [];
-  smashCount = passCount = 0;
-  document.getElementById('smash-n').textContent = 0;
-  document.getElementById('pass-n').textContent = 0;
-  buildDots();
-  buildStack();
+  deck=[...creatures]; results=[]; smashCount=passCount=0;
+  document.getElementById('smash-n').textContent=0;
+  document.getElementById('pass-n').textContent=0;
+  buildDots(); buildStack();
 }
 
 function buildDots() {
-  const wrap = document.getElementById('dots');
-  wrap.innerHTML = '';
-  deck.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.id = 'dot' + i;
-    wrap.appendChild(d);
+  const w=document.getElementById('dots'); w.innerHTML='';
+  deck.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='dot'+(i===0?' active':'');
+    d.id='dot'+i; w.appendChild(d);
   });
 }
 
 function buildStack() {
-  const stack = document.getElementById('stack');
-  stack.innerHTML = '';
-  topEl = null;
-
-  // Render cards back-to-front so top card is last in DOM (highest stacking context)
-  const count = Math.min(3, deck.length);
-  for (let depth = count - 1; depth >= 0; depth--) {
-    const card = makeCard(deck[depth], depth);
+  const stack=document.getElementById('stack'); stack.innerHTML=''; topEl=null;
+  const count=Math.min(3,deck.length);
+  for(let depth=count-1;depth>=0;depth--){
+    const card=makeCard(deck[depth],depth);
     stack.appendChild(card);
-    if (depth === 0) topEl = card;
+    if(depth===0){topEl=card;}
   }
-
-  if (topEl) bindDrag(topEl);
+  if(topEl) bindDrag(topEl);
 }
 
-function makeCard(creature, depth) {
-  const card = document.createElement('div');
-  card.className = 'card' + (depth > 0 ? ' depth-' + depth : ' depth-0');
-  card.dataset.depth = depth;
+function makeCard(c,depth){
+  const card=document.createElement('div');
+  card.className='card depth-'+depth;
+  card.dataset.depth=depth;
 
-  const img = document.createElement('img');
-  img.src = creature.img;
-  img.alt = creature.name;
-  img.classList.add('loading');
-  img.onload  = () => img.classList.remove('loading');
-  img.onerror = () => { img.style.background = 'linear-gradient(135deg,#0d1117 0%,#1e3a5f 100%)'; img.classList.remove('loading'); };
+  const img=document.createElement('img');
+  img.src=c.img; img.alt=c.name; img.classList.add('loading');
+  img.onload=()=>img.classList.remove('loading');
+  img.onerror=()=>{img.style.cssText='background:#1e293b!important;min-height:200px;';img.classList.remove('loading');};
 
-  const info = document.createElement('div');
-  info.className = 'card-info';
-  info.innerHTML = `
-    <h2>${creature.name}</h2>
-    <div class="card-tagline">${creature.tagline}</div>
-    <div class="card-emojis">${creature.emojis.map(e=>`<span>${e}</span>`).join('')}</div>
-  `;
+  const info=document.createElement('div');
+  info.className='card-info';
+  info.innerHTML=`<h2>${c.name}</h2><div class="card-tagline">${c.tagline}</div><div class="card-emojis">${c.emojis.map(e=>`<span>${e}</span>`).join('')}</div>`;
 
-  const ss = document.createElement('div');
-  ss.className = 'stamp stamp-smash';
-  ss.textContent = 'SMASH';
+  const ss=document.createElement('div'); ss.className='stamp stamp-smash'; ss.textContent='SMASH';
+  const sp=document.createElement('div'); sp.className='stamp stamp-pass';  sp.textContent='PASS';
 
-  const sp = document.createElement('div');
-  sp.className = 'stamp stamp-pass';
-  sp.textContent = 'PASS';
-
-  card.appendChild(img);
-  card.appendChild(info);
-  card.appendChild(ss);
-  card.appendChild(sp);
+  card.appendChild(img); card.appendChild(info); card.appendChild(ss); card.appendChild(sp);
   return card;
 }
 
-function bindDrag(card) {
-  card.addEventListener('mousedown',  onStart);
-  card.addEventListener('touchstart', onStart, { passive: true });
+function bindDrag(card){
+  card.addEventListener('mousedown', onStart);
+  card.addEventListener('touchstart', onStart, {passive:true});
 }
 
-function onStart(e) {
-  if (dragging) return;
-  dragging = true;
-  const pt = e.touches ? e.touches[0] : e;
-  startX = pt.clientX;
-  curX = 0;
-  topEl.style.transition = 'none';
-  document.addEventListener('mousemove',  onMove);
-  document.addEventListener('mouseup',    onEnd);
-  document.addEventListener('touchmove',  onMove, { passive: true });
-  document.addEventListener('touchend',   onEnd);
+function onStart(e){
+  if(dragging)return; dragging=true;
+  const pt=e.touches?e.touches[0]:e;
+  startX=pt.clientX; curX=0;
+  topEl.style.transition='none';
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('mouseup',   onEnd);
+  document.addEventListener('touchmove', onMove, {passive:true});
+  document.addEventListener('touchend',  onEnd);
 }
 
-function onMove(e) {
-  if (!dragging) return;
-  const pt = e.touches ? e.touches[0] : e;
-  curX = pt.clientX - startX;
-  const rot = curX * 0.07;
-  topEl.style.transform = `translateX(${curX}px) rotate(${rot}deg)`;
-  const ratio = Math.min(Math.abs(curX) / 90, 1);
-  const ss = topEl.querySelector('.stamp-smash');
-  const sp = topEl.querySelector('.stamp-pass');
-  if (curX > 15)       { ss.style.opacity = ratio; sp.style.opacity = 0; }
-  else if (curX < -15) { sp.style.opacity = ratio; ss.style.opacity = 0; }
-  else                 { ss.style.opacity = 0;      sp.style.opacity = 0; }
+function onMove(e){
+  if(!dragging)return;
+  const pt=e.touches?e.touches[0]:e;
+  curX=pt.clientX-startX;
+  topEl.style.transform=`translateX(${curX}px) rotate(${curX*0.07}deg)`;
+  const ratio=Math.min(Math.abs(curX)/90,1);
+  const ss=topEl.querySelector('.stamp-smash');
+  const sp=topEl.querySelector('.stamp-pass');
+  if(curX>15){ss.style.opacity=ratio;sp.style.opacity=0;}
+  else if(curX<-15){sp.style.opacity=ratio;ss.style.opacity=0;}
+  else{ss.style.opacity=0;sp.style.opacity=0;}
 }
 
-function onEnd() {
-  if (!dragging) return;
-  dragging = false;
-  document.removeEventListener('mousemove',  onMove);
-  document.removeEventListener('mouseup',    onEnd);
-  document.removeEventListener('touchmove',  onMove);
-  document.removeEventListener('touchend',   onEnd);
-
-  if      (curX >  80) vote('smash');
-  else if (curX < -80) vote('pass');
-  else {
-    topEl.style.transition = 'transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275)';
-    topEl.style.transform = '';
-    topEl.querySelector('.stamp-smash').style.opacity = 0;
-    topEl.querySelector('.stamp-pass').style.opacity  = 0;
+function onEnd(){
+  if(!dragging)return; dragging=false;
+  document.removeEventListener('mousemove',onMove); document.removeEventListener('mouseup',onEnd);
+  document.removeEventListener('touchmove',onMove); document.removeEventListener('touchend',onEnd);
+  if(curX>80) vote('smash');
+  else if(curX<-80) vote('pass');
+  else{
+    topEl.style.transition='transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275)';
+    topEl.style.transform='';
+    topEl.querySelector('.stamp-smash').style.opacity=0;
+    topEl.querySelector('.stamp-pass').style.opacity=0;
   }
 }
 
-function vote(type) {
-  if (!deck.length || !topEl) return;
+function vote(type){
+  if(!deck.length||!topEl)return;
+  const card=topEl;
+  card.querySelector('.stamp-'+(type==='smash'?'smash':'pass')).style.opacity=1;
+  card.querySelector('.stamp-'+(type==='smash'?'pass':'smash')).style.opacity=0;
+  card.style.transition='none'; card.style.pointerEvents='none';
+  card.classList.add(type==='smash'?'fly-right':'fly-left');
+  const gone=deck.shift(); results.push({creature:gone,type});
+  if(type==='smash'){smashCount++;document.getElementById('smash-n').textContent=smashCount;}
+  else{passCount++;document.getElementById('pass-n').textContent=passCount;}
+  const idx=results.length-1;
+  const dot=document.getElementById('dot'+idx);
+  if(dot){dot.classList.remove('active');dot.classList.add(type==='smash'?'smashed':'passed');}
+  const next=document.getElementById('dot'+(idx+1));
+  if(next)next.classList.add('active');
 
-  const card = topEl;
-  card.querySelector('.stamp-' + (type === 'smash' ? 'smash' : 'pass')).style.opacity = 1;
-  card.querySelector('.stamp-' + (type === 'smash' ? 'pass' : 'smash')).style.opacity = 0;
-
-  card.style.transition = 'none';
-  card.style.pointerEvents = 'none';
-  card.classList.add(type === 'smash' ? 'fly-right' : 'fly-left');
-
-  const gone = deck.shift();
-  results.push({ creature: gone, type });
-
-  if (type === 'smash') { smashCount++; document.getElementById('smash-n').textContent = smashCount; }
-  else                  { passCount++;  document.getElementById('pass-n').textContent  = passCount; }
-
-  // dots
-  const idx = results.length - 1;
-  const dot = document.getElementById('dot' + idx);
-  if (dot) { dot.classList.remove('active'); dot.classList.add(type === 'smash' ? 'smashed' : 'passed'); }
-  const next = document.getElementById('dot' + (idx + 1));
-  if (next) next.classList.add('active');
-
-  card.addEventListener('animationend', () => {
+  card.addEventListener('animationend',()=>{
     card.remove();
-    if (!deck.length) { showDone(); return; }
-
-    const stack = document.getElementById('stack');
-
-    // Promote depth-1 → depth-0 (new top card)
-    const d1 = stack.querySelector('.depth-1');
-    if (d1) {
-      d1.classList.remove('depth-1');
-      d1.dataset.depth = 0;
-      d1.classList.add('depth-0', 'promote-0');
-      d1.style.pointerEvents = '';
-      d1.addEventListener('animationend', () => d1.classList.remove('promote-0'), { once: true });
-      topEl = d1;
-      bindDrag(d1);
+    if(!deck.length){showDone();return;}
+    const stack=document.getElementById('stack');
+    const d1=stack.querySelector('.depth-1');
+    if(d1){
+      d1.classList.remove('depth-1'); d1.dataset.depth=0;
+      d1.classList.add('depth-0','promote-top');
+      d1.style.pointerEvents='';
+      d1.addEventListener('animationend',()=>d1.classList.remove('promote-top'),{once:true});
+      topEl=d1; bindDrag(d1);
     }
-
-    // Promote depth-2 → depth-1
-    const d2 = stack.querySelector('.depth-2');
-    if (d2) {
-      d2.classList.remove('depth-2');
-      d2.dataset.depth = 1;
-      d2.classList.add('depth-1', 'promote-1');
-      d2.addEventListener('animationend', () => d2.classList.remove('promote-1'), { once: true });
+    const d2=stack.querySelector('.depth-2');
+    if(d2){
+      d2.classList.remove('depth-2'); d2.dataset.depth=1;
+      d2.classList.add('depth-1','promote-mid');
+      d2.addEventListener('animationend',()=>d2.classList.remove('promote-mid'),{once:true});
     }
-
-    // Add new depth-2 card if available
-    if (deck.length >= 3) {
-      const newCard = makeCard(deck[2], 2);
-      stack.insertBefore(newCard, stack.firstChild);
+    if(deck.length>=3){
+      const nc=makeCard(deck[2],2);
+      stack.insertBefore(nc,stack.firstChild);
     }
-  }, { once: true });
+  },{once:true});
 }
 
-function showDone() {
-  ['stack-wrap','dots','btn-row'].forEach(id => document.getElementById(id).style.display = 'none');
-  document.querySelector('.hint').style.display = 'none';
-  const done = document.getElementById('done');
-  done.style.display = 'flex';
-  const grid = document.getElementById('result-grid');
-  grid.innerHTML = '';
-  results.forEach(({ creature, type }) => {
-    const chip = document.createElement('div');
-    chip.className = 'chip chip-' + type;
-    chip.textContent = (type === 'smash' ? '💚 ' : '💀 ') + creature.name;
+function showDone(){
+  ['stack-wrap','dots','btn-row'].forEach(id=>document.getElementById(id).style.display='none');
+  document.querySelector('.hint').style.display='none';
+  const done=document.getElementById('done'); done.style.display='flex';
+  const grid=document.getElementById('result-grid'); grid.innerHTML='';
+  results.forEach(({creature,type})=>{
+    const chip=document.createElement('div');
+    chip.className='chip chip-'+type;
+    chip.textContent=(type==='smash'?'💚 ':'💀 ')+creature.name;
     grid.appendChild(chip);
   });
 }
 
-function restart() {
-  ['stack-wrap','dots','btn-row'].forEach(id => document.getElementById(id).style.display = '');
-  document.querySelector('.hint').style.display = '';
-  document.getElementById('done').style.display = 'none';
+function restart(){
+  ['stack-wrap','dots','btn-row'].forEach(id=>document.getElementById(id).style.display='');
+  document.querySelector('.hint').style.display='';
+  document.getElementById('done').style.display='none';
   init();
 }
 
